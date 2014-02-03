@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 	end
 
 	def post
-		require 'net/http'
+		require 'net/https'
 		info = params[:nxt]
 		secret_phrase = info[:secret_phrase]
 		recipient = info[:recipient]
@@ -23,6 +23,9 @@ class HomeController < ApplicationController
 			@transaction = 'derp'
 			@url = "https://holms.cloudapp.net:6875/nxt?requestType=sendMoney&secretPhrase=" + secret_phrase + '&recipient=' + recipient + '&amount=' + amount + '&fee=' + fee + '&deadline=' + deadline
 			the_url = URI.parse(@url)
+			http = Net::HTTP.new(the_url.host, the_url.port)
+			http.use_ssl = true
+			http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 			resp_unparsed = Net::HTTP.get_response(the_url)
 			resp = JSON.parse(resp_unparsed.body)
 			@transaction = resp[:transaction]
