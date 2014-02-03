@@ -26,9 +26,10 @@ class HomeController < ApplicationController
 			http = Net::HTTP.new(the_url.host, the_url.port)
 			http.use_ssl = true
 			http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-			resp_unparsed = Net::HTTP.get_response(the_url)
-			resp = JSON.parse(resp_unparsed.body)
-			@transaction = resp[:transaction]
+			request = Net::HTTP::Get.new(the_url.request_uri)
+			resp_unparsed = http.request(request)
+			@resp = JSON.parse(resp_unparsed.body)
+			@transaction = @resp[:transaction]
 
 		end
 	end
