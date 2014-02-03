@@ -1,0 +1,11 @@
+<h1>NXT</h1>
+Currently looks like crap. <br></br>
+<%= simple_form_for :nxt, :url=> post_transaction_path, :method=>:post, :remote => true do |f| %>
+		<%= f.input :secret_phrase, :label => "Secret Phrase", :as => :password %>
+		<%= f.input :recipient, :label => "Recipient" %>
+		<%= f.input :amount, :label => "Amount", :as=> :integer %>
+		<%= f.input :fee, :label => "Fee", :as=>:integer %>
+		<%= f.input :deadline, :label => "Deadline" %>
+		<%= f.submit %>
+<% end %>
+<br><br>
