@@ -1,0 +1,18 @@
+<link href="http://getbootstrap.com/assets/css/docs.min.css" rel="stylesheet">
+
+<div class="col-md-3 col-md-offset-4">
+	<center><span class="bs-booticon bs-booticon-lg bs-booticon-outline" style="background-color:#6f5499">N</span></center><br>
+	<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+	  <div class="form-inputs">
+	     <%= f.input :email, :required => false, :autofocus => true, :placeholder=>"Email" %>
+	     <%= f.input :password, :required => false, :placeholder=>"Password" %>
+	     <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+	  </div>
+
+	  <center>
+	  <div class="form-actions">
+	    <%= f.button :submit, "Sign in", :class => "btn btn-primary btn-lg" %>
+	  </div>
+	  </center>
+	<% end %>
+</div>

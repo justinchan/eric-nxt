@@ -1,19 +1,11 @@
-<div class="jumbotron">
+<link href="http://getbootstrap.com/assets/css/docs.min.css" rel="stylesheet">
+<main class="bs-masthead" id="content" role="main">
   <div class="container">
-    <h1>Hello, world!</h1>
-  	<p>...</p>
-  	<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+    <span class="bs-booticon bs-booticon-lg bs-booticon-outline">N</span>
+    <!-- <h1>Bootstrap</h1> -->
+    <p class="lead">NXT Trading made easy.</p>
+    <p class="lead">
+      <%= link_to "Sign Up", new_user_registration_path, :class => "btn btn-outline-inverse btn-lg" %>
+    </p>
   </div>
-</div>
-<h1>NXT</h1>
-Currently looks like crap. <br></br>
-<%= simple_form_for :nxt, :url=> post_transaction_path, :method=>:post, :remote => true do |f| %>
-		<%= f.input :secret_phrase, :label => "Secret Phrase", :as => :password %>
-		<%= f.input :recipient, :label => "Recipient" %>
-		<%= f.input :amount, :label => "Amount", :as=> :integer %>
-		<%= f.input :fee, :label => "Fee", :as=>:integer %>
-		<%= f.input :deadline, :label => "Deadline" %>
-		<%= f.submit %>
-<% end %>
-<br><br>
-<div id="result"></div>
+</main>

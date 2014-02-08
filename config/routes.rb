@@ -1,8 +1,12 @@
 EricNxt::Application.routes.draw do
+  devise_for :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  match 'send' => 'home#post', :as => :post_transaction
+  match 'send' => 'dashboard#post', :as => :post_transaction
+  match 'dashboard' => 'dashboard#index', :as => :dashboard  
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
