@@ -1,7 +1,7 @@
 <script>
 $( function () {
-$( "#nxt_coin_or_asset" ).change(function() {
-  var select = $("#nxt_coin_or_asset option:selected").text();
+$( "#initiate_coin_or_asset" ).change(function() {
+  var select = $("#initiate_coin_or_asset option:selected").text();
   if (select == "Coin") {
   	$("#disp").show();
   	$("#disp3").hide();
@@ -14,8 +14,8 @@ $( "#nxt_coin_or_asset" ).change(function() {
 });
 });
 $( function () {
-$( "#nxt_wanted_coin_or_asset" ).change(function() {
-  var select = $("#nxt_wanted_coin_or_asset option:selected").text();
+$( "#initiate_wanted_coin_or_asset" ).change(function() {
+  var select = $("#initiate_wanted_coin_or_asset option:selected").text();
   if (select == "Coin") {
   	$("#disp2").show();
   	$("#disp4").hide();
