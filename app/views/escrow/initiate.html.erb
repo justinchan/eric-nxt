@@ -1,0 +1,76 @@
+<script>
+$( function () {
+$( "#nxt_coin_or_asset" ).change(function() {
+  var select = $("#nxt_coin_or_asset option:selected").text();
+  if (select == "Coin") {
+  	$("#disp").show();
+  	$("#disp3").hide();
+  } else if (select == "Asset") {
+  	$("#disp").hide();
+  	$("#disp3").show();
+  } else {
+  	$("#disp, #disp3").hide();
+  }
+});
+});
+$( function () {
+$( "#nxt_wanted_coin_or_asset" ).change(function() {
+  var select = $("#nxt_wanted_coin_or_asset option:selected").text();
+  if (select == "Coin") {
+  	$("#disp2").show();
+  	$("#disp4").hide();
+  } else if (select == "Asset") {
+  	$("#disp2").hide();
+  	$("#disp4").show();
+  } else {
+  	$("#disp2, #disp4").hide();
+  }
+});
+});
+
+</script>
+<div class="container-fluid">
+      <div class="row">
+        <%= render "layouts/sidebar" %>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Initiate Escrow</h1>
+          <div class="row">
+          	<div class="col-sm-3 col-md-3">
+	        <%= simple_form_for :initiate, :url=> post_escrow_path, :method=>:post do |f| %>
+	        	<h3>I want to trade</h3><hr>
+	        	<h4>Coin or asset</h4>
+				<%= f.input :coin_or_asset, :as => :select, :id => "derp", collection: ["Coin", "Asset"] %>
+				<div id="disp" style="display:none"><h4>Type of coin</h4><%= f.input :coin, :as => :select, collection: ["NXT", "BTC"] %></div>
+				<div id="disp3" style="display:none"><h4>Type of asset</h4><%= f.input :asset, :as => :select, collection: ["AEN"] %></div>
+				<h4>Amount</h4>
+				<%= f.input :amount %>
+			</div>
+			<div class="col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1">
+				<h3>In return for</h3><hr>
+				<h4>Coin or asset</h4>
+				<%= f.input :wanted_coin_or_asset, :as => :select, :id => "derp", collection: ["Coin", "Asset"] %>
+				<div id="disp2" style="display:none"><h4>Type of coin</h4><%= f.input :wanted_coin, :as => :select, collection: ["NXT", "BTC"] %></div>
+				<div id="disp4" style="display:none"><h4>Type of asset</h4><%= f.input :wanted_asset, :as => :select, collection: ["AEN"] %></div>
+				<h4>Amount</h4>
+				<%= f.input :wanted_amount %>
+				<h4>Username to trade with</h4>
+				<%= f.input :username_to_trade_with %>
+				<h4>Your account to receive funds</h4>
+				<%= f.input :account_to_receive %>
+			</div>
+			<div class="col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1">
+				<h3>When</h3><hr>
+				<h4>Deadline to receive funds</h4>
+				<%= f.input :deadline %>
+				<h4>Cancellation deadline</h4>
+				<%= f.input :cancellation %>
+				<%= f.submit :value => "Confirm", :class => "btn btn-primary btn-lg" %>
+			</div>
+			<% end %>
+			</div>
+		  </div>
+
+        
+        </div>
+      </div>
+    </div>

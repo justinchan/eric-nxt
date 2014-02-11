@@ -1,13 +1,18 @@
-<h1>NXT</h1>
-Currently looks like crap. <br></br>
-<%= simple_form_for :nxt, :url=> post_transaction_path, :method=>:post, :remote => true do |f| %>
-		<%= f.input :secret_phrase, :label => "Secret Phrase", :as => :password %>
-		<%= f.input :recipient, :label => "Recipient" %>
-		<%= f.input :amount, :label => "Amount", :as=> :integer %>
-		<%= f.input :fee, :label => "Fee", :as=>:integer %>
-		<%= f.input :deadline, :label => "Deadline" %>
-		<%= f.submit %>
-<% end %>
+
+<div class="container-fluid">
+      <div class="row">
+        <%= render "layouts/sidebar" %>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
+
+		Nothing to see here yet. <br></br>
+		<%= simple_form_for :nxt, :url=> post_transaction_path, :method=>:post, :remote => true do |f| %>
+				<%= f.input :secret_phrase, :placeholder => "Secret Phrase", :as => :password %>
+				<%= f.input :recipient, :placeholder => "Recipient" %>
+				<%= f.input :amount, :placeholder => "Amount", :as=> :integer %>
+				<%= f.input :fee, :placeholder => "Fee", :as=>:integer %>
+				<%= f.input :deadline, :placeholder => "Deadline" %>
+				<%= f.submit :value => "Send NXT", :class => "btn btn-primary" %>
+		<% end %>
 <br><br>
 <div id="result"></div>
-<%= render "layouts/modal" %>
