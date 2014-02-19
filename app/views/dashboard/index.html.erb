@@ -1,11 +1,52 @@
+<script>
+function show_escrow(id) {
+	var derp = $.ajax({
+		url: 'dashboard/escrow/show/' + id,
+		type: 'GET'
+	});
+	derp.done(function () {
+		$("h4#myModalLabel").html("Escrow Details");
+		$(".a-unique-class").html('<%= escape_javascript(render :partial => 'layouts/show', :escrow_to_display => @escrow_to_display) %>');
+		$("#my-modal").modal('show');
+	});
+
+};
+</script>
+
 
 <div class="container-fluid">
       <div class="row">
         <%= render "layouts/sidebar" %>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
+           <div class="row">
+          	<div class="col-sm-10 col-md-10">
+          		<h2>Active Escrow Requests</h2><br>
+          		<table class="table table-hover">
+					<thead>
+						<th>Initiator</th>
+						<th>Trading</th>
+						<th>For</th>
+						<th>Respond by</th>
+					</thead>
+					<% @my_escrows.each do |escrow| %>
+					<tbody onClick="show_escrow(<%= escrow.id %>)">
+						<td><%= escrow.user.username %></td>
+						<td><%= escrow.amount %> <%= escrow.coin_or_asset == "Coin" ? escrow.coin : escrow.asset %></td>
+						<td><%= escrow.wanted_amount %> <%= escrow.wanted_coin_or_asset == "Coin" ? escrow.wanted_coin : escrow.wanted_asset %></td>
+						<td><%= escrow.deadline.in_time_zone("Pacific Time (US & Canada)").strftime("%b %d %I:%M %p") %></td>
 
-		Nothing to see here yet. <br></br>
+					</tbody>
+					<% end %>
+				</table>
+			</div>
+		   </div>
+		</div>
+	</div>
+</div>
+
+
+		<!--This is a comment. Comments are not displayed in the browser 
 		<%= simple_form_for :nxt, :url=> post_transaction_path, :method=>:post, :remote => true do |f| %>
 				<%= f.input :secret_phrase, :placeholder => "Secret Phrase", :as => :password %>
 				<%= f.input :recipient, :placeholder => "Recipient" %>
@@ -14,5 +55,7 @@
 				<%= f.input :deadline, :placeholder => "Deadline" %>
 				<%= f.submit :value => "Send NXT", :class => "btn btn-primary" %>
 		<% end %>
-<br><br>
+		-->
+<%= render 'layouts/modal' %>
 <div id="result"></div>
+

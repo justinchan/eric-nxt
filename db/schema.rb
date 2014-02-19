@@ -11,7 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140210073411) do
+ActiveRecord::Schema.define(:version => 20140216235057) do
+
+  create_table "escrows", :force => true do |t|
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "wanted_coin_or_asset"
+    t.string   "wanted_coin"
+    t.float    "wanted_amount"
+    t.string   "wanted_asset"
+    t.string   "account_to_receive"
+    t.datetime "deadline"
+    t.datetime "cancellation"
+    t.string   "coin_or_asset"
+    t.string   "coin"
+    t.string   "asset"
+    t.float    "amount"
+    t.integer  "user_id"
+    t.integer  "initiator_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

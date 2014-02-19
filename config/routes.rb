@@ -8,6 +8,8 @@ EricNxt::Application.routes.draw do
   match 'dashboard' => 'dashboard#index', :as => :dashboard  
   match 'dashboard/escrow/initiate' => 'escrow#initiate', :as => :initiate_escrow
   match 'dashboard/escrow/post' => 'escrow#post', :as => :post_escrow
+  match 'dashboard/escrow/require/:id' => "escrow#respond", :as => :respond_escrow
+  match 'dashboard/escrow/show/:id' => "escrow#show", :as => :show_escrow
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

@@ -27,30 +27,41 @@ $( "#initiate_wanted_coin_or_asset" ).change(function() {
   }
 });
 });
-
 </script>
+<style>
+select.date, select.time, input#initiate_cancellation, select#initiate_cancellation_time {
+	width: 150px;
+	float: left;
+	margin-right: 5px;
+}
+
+input#initiate_cancellation {
+	margin-top: 5px;
+}
+
+</style>
 <div class="container-fluid">
-      <div class="row">
+      <div class="row-fluid">
         <%= render "layouts/sidebar" %>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Initiate Escrow</h1>
-          <div class="row">
-          	<div class="col-sm-3 col-md-3">
+          <div class="row-fluid">
+          	<div class="col-sm-5 col-md-5">
 	        <%= simple_form_for :initiate, :url=> post_escrow_path, :method=>:post do |f| %>
 	        	<h3>I want to trade</h3><hr>
 	        	<h4>Coin or asset</h4>
 				<%= f.input :coin_or_asset, :as => :select, :id => "derp", collection: ["Coin", "Asset"] %>
-				<div id="disp" style="display:none"><h4>Type of coin</h4><%= f.input :coin, :as => :select, collection: ["NXT", "BTC"] %></div>
-				<div id="disp3" style="display:none"><h4>Type of asset</h4><%= f.input :asset, :as => :select, collection: ["AEN"] %></div>
+				<div id="disp" style="display:none"><h4>Type of coin</h4><%= f.input :coin, :required => false, :as => :select, collection: ["NXT", "BTC"] %></div>
+				<div id="disp3" style="display:none"><h4>Type of asset</h4><%= f.input :asset, :required => false,  :as => :select, collection: ["AEN"] %></div>
 				<h4>Amount</h4>
 				<%= f.input :amount %>
 			</div>
-			<div class="col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1">
+			<div class="col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-1">
 				<h3>In return for</h3><hr>
 				<h4>Coin or asset</h4>
 				<%= f.input :wanted_coin_or_asset, :as => :select, :id => "derp", collection: ["Coin", "Asset"] %>
-				<div id="disp2" style="display:none"><h4>Type of coin</h4><%= f.input :wanted_coin, :as => :select, collection: ["NXT", "BTC"] %></div>
-				<div id="disp4" style="display:none"><h4>Type of asset</h4><%= f.input :wanted_asset, :as => :select, collection: ["AEN"] %></div>
+				<div id="disp2" style="display:none"><h4>Type of coin</h4><%= f.input :wanted_coin, :required => false,  :as => :select, collection: ["NXT", "BTC"] %></div>
+				<div id="disp4" style="display:none"><h4>Type of asset</h4><%= f.input :wanted_asset, :required => false,  :as => :select, collection: ["AEN"] %></div>
 				<h4>Amount</h4>
 				<%= f.input :wanted_amount %>
 				<h4>Username to trade with</h4>
@@ -58,13 +69,18 @@ $( "#initiate_wanted_coin_or_asset" ).change(function() {
 				<h4>Your account to receive funds</h4>
 				<%= f.input :account_to_receive %>
 			</div>
-			<div class="col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1">
+		    </div>
+		    <div class="row-fluid">
+			<div class="col-sm-6 col-md-6">
 				<h3>When</h3><hr>
-				<h4>Deadline to receive funds</h4>
-				<%= f.input :deadline %>
+				<h4>This escrow expires</h4>
+				<%= f.input :deadline, :as => :date %><br><br>
+				<%= f.input :deadline_time, :as => :time, :time_separator => ""%>
+				<br><br>
 				<h4>Cancellation deadline</h4>
 				<%= f.input :cancellation %>
-				<%= f.submit :value => "Confirm", :class => "btn btn-primary btn-lg" %>
+				<%= f.input :cancellation_time, :as => :select, collection: ["Minutes", "Hours", "Days"] %><br><br><br>
+				<%= f.button :submit, "Confirm", :class => "btn btn-primary btn-lg" %>
 			</div>
 			<% end %>
 			</div>

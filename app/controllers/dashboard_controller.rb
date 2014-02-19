@@ -2,6 +2,17 @@ class DashboardController < ApplicationController
 	before_filter :authenticate_user!
 
 	def index
+		escrow_array = []
+		Escrow.find_all_by_user_id(current_user.id).each do |escrow|
+			if escrow.deadline < Time.now
+				escrow.delete
+			else
+				escrow_array << escrow
+			end
+		end
+		@my_escrows = escrow_array
+
+
 	end
 
 	def post
